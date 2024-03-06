@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#ffffff</color>
+    <color name="purple">#C40EE3</color>
+    <color name="notif">#F1940A</color>
+
+    <color name="statusbar">#87CEEB</color>
+    <color name="grey">#ff424242</color>
+    <color name="bgcolor">#28282b</color>
+    <color name="bottomtopbat">#353935</color>
+    <color name="main">#16183D</color>
+    <color name="card">#E392DF</color>
+    <color name="text">#FFFF00</color>
+</resources>

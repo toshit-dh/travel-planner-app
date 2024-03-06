@@ -1,0 +1,159 @@
+
+[
+  {
+    "morning": {
+      "activity": "Visit Aga Khan Palace",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore Shaniwar Wada",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Attend a cultural performance at Bal Gandharva Rang Mandir",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Trek to Sinhagad Fort",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Visit Raja Dinkar Kelkar Museum",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Shop for traditional handicrafts in Laxmi Road",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Osho International Meditation Resort",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Katraj Snake Park",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Attend a Bollywood movie at City Pride Satara Road",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Vishrambaug Wada",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Shop for ethnic wear in MG Road",
+      "cost": "100 INR"
+    },
+    "evening": {
+      "activity": "Enjoy a traditional Maharashtrian dinner at Vaishali",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Pune-Okayama Friendship Garden",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Rajiv Gandhi Zoological Park",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Attend a Sufi music concert at the Aga Khan Palace",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the National War Museum",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Mahatma Phule Sanskruti Bhavan",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Enjoy a romantic dinner at The Corinthians Resort & Club",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Bund Garden",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Shop for souvenirs in Tulsi Baug",
+      "cost": "100 INR"
+    },
+    "evening": {
+      "activity": "Attend a dance performance at the Bharat Natyam Kalakshetra",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Pataleshwar Cave Temple",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Peshwe Park",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Enjoy a rooftop dinner at the JW Marriott Hotel",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the Saras Baug",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Dagdusheth Halwai Ganpati Temple",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Attend a live music performance at the Hard Rock Cafe",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "morning": {
+      "activity": "Visit the University of Pune",
+      "cost": "50 INR"
+    },
+    "afternoon": {
+      "activity": "Explore the Nehru Memorial Planetarium",
+      "cost": "20 INR"
+    },
+    "evening": {
+      "activity": "Enjoy a farewell dinner at the Blue Nile",
+      "cost": "100 INR"
+    }
+  },
+  {
+    "interestingActivities": [
+      {
+        "activity": "Visit the Lavasa International Convention Centre",
+        "cost": "100 INR"
+      },
+      {
+        "activity": "Explore the Panshet Dam",
+        "cost": "50 INR"
+      },
+      {
+        "activity": "Attend a cooking class at the Savitri Culinary Academy",
+        "cost": "100 INR"
+      }
+    ]
+  }
+]

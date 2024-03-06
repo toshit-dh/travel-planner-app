@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
+
+    <!-- Main Vertical LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Text for Activity Name -->
+        <TextView
+            android:id="@+id/textActivityName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+        <!-- Horizontal LinearLayout for Category and Rank -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Text for Category -->
+            <TextView
+                android:id="@+id/textCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:maxLines="1"
+                android:textColor="#ffffff"
+                android:text="Category"/>
+
+            <!-- Text for Rank -->
+            <TextView
+                android:id="@+id/textRank"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="Rank"/>
+        </LinearLayout>
+
+        <!-- Text for Additional Information -->
+        <TextView
+            android:id="@+id/textAdditionalInfoact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="#ffffff"
+            android:paddingTop="8dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

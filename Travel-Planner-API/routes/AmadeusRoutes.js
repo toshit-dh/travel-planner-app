@@ -1,0 +1,10 @@
+const { getHotels, getFlights, getDestination, getActivities, getHotelReview } = require('../controllers/AmadeusController')
+const { giveToken } = require('../middlewares/AmadeusMiddleware')
+const {verifyToken} = require('../middlewares/UserMiddleware')
+const router = require('express').Router()
+router.get("/getHotels",verifyToken,giveToken,getHotels)
+router.get("/getHotelReview",verifyToken,giveToken,getHotelReview)
+router.get("/getFlights",verifyToken,giveToken,getFlights)
+router.get("/getDest",verifyToken,giveToken,getDestination)
+router.get("/getActivity",verifyToken,giveToken,getActivities)
+module.exports = router

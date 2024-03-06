@@ -1,0 +1,10 @@
+const { addSugg, removeSugg, getSugg, getUserSugg, voteSugg, removeVote } = require('../controllers/SuggestionController')
+const { verifyToken } = require('../middlewares/UserMiddleware')
+const router = require('express').Router()
+router.get("/addSugg",verifyToken,addSugg)
+router.get("/removeSugg",verifyToken,removeSugg)
+router.get("/getSugg",verifyToken,getSugg)
+router.get("/mySugg",verifyToken,getUserSugg)
+router.get("voteSugg",verifyToken,voteSugg)
+router.get("removeVote",verifyToken,removeVote)
+module.exports = router

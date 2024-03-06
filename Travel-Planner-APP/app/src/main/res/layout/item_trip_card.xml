@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".fragments.PlanFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/tripid"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tripcreator"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/departureDateTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Departure Date-Time"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <!-- Arrival Date-Time TextView -->
+            <TextView
+                android:id="@+id/arrivalDateTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arrival Date-Time"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/arrivalcity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arrival City: "
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tripseemore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="See More"
+                android:textSize="20dp"
+                android:textColor="@color/text"
+                />
+            <LinearLayout
+                android:id="@+id/tripseelessmore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:text="Trip Mates: "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    />
+                <TextView
+                    android:id="@+id/tripmates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:padding="8dp"
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:backgroundTint="@color/main"
+                    android:layout_width="match_parent"
+                    android:elevation="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/searchWeather"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/text"
+                        android:textSize="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="See Weather Updates?"
+                        android:drawableLeft="@drawable/search"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/wearecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:visibility="gone"/>
+                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:paddingTop="8dp"
+                    android:id="@+id/tripImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+                <TextView
+                    android:padding="2dp"
+                    android:id="@+id/tripseeless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="See Less"
+                    android:textSize="20dp"
+                    android:textColor="@color/text"
+                    />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
+                    <Button
+                        android:id="@+id/setAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:backgroundTint="@color/text"
+                        android:padding="8dp"
+                        android:text="Set Alarm"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintEnd_toStartOf="@+id/cancelTrip"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/cancelTrip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="44dp"
+                        android:backgroundTint="@color/text"
+                        android:padding="8dp"
+                        android:text="Cancel Trip"
+                        android:textSize="18sp"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:layout_editor_absoluteY="0dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main"
+    tools:context=".fragments.SuggestFragment">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/switchLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/add"
+        app:backgroundTint="@color/text"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="66dp">
+        <LinearLayout
+            android:id="@+id/seesuggLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/searchsuggbyother"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search"/>
+            <AutoCompleteTextView
+                android:id="@+id/tagsugg"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:hint="Tag"
+                android:textColorHint="#ffffff" />
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/citysugg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:hint="City"
+                android:textColorHint="#ffffff"
+                />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggestionChat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="66dp"
+        android:id="@+id/addsuggLay"
+        android:visibility="gone"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:text="Tag: "
+                android:textAlignment="center"
+                android:textColor="@color/text"/>
+            <AutoCompleteTextView
+                android:id="@+id/autotag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Select Tag"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:text="Country: "
+                android:textSize="30dp"/>
+            <AutoCompleteTextView
+                android:id="@+id/autocountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Select Country"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:text="City: "
+                android:textSize="30dp"/>
+            <AutoCompleteTextView
+                android:id="@+id/autocity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Select City"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/suggmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Suggestion Here..."/>
+        <Button
+            android:id="@+id/addSuggestionbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/text"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="Add Suggestion"
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            tools:layout_editor_absoluteY="0dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/text"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:text="Your Suggestions"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mysuggestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp" />
+    </LinearLayout>
+</FrameLayout>

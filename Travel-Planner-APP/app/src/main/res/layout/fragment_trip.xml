@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main"
+    tools:context=".fragments.TripFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/mytrip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/font1"
+        android:gravity="center"
+        android:text="Your Trips"
+        android:textColor="@color/text"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+    <ProgressBar
+        android:id="@+id/progressBartrips"
+        android:layout_below="@id/mytrip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:max="100"
+        android:progress="50"
+        android:progressTint="@color/text" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/mytrip"
+        android:id="@+id/tripsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:scrollbars="none" />
+    </RelativeLayout>
+</FrameLayout>
