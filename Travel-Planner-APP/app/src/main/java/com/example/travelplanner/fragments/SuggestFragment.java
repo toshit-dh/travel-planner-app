@@ -110,7 +110,7 @@ public class SuggestFragment extends Fragment {
             public void onClick(View view) {
                 addSuggestion.setVisibility(View.VISIBLE);
                 seeSuggestion.setVisibility(View.GONE);
-                mySuggestionRecycler.setVisibility(View.GONE);
+                otherSuggestionRecycler.setVisibility(View.GONE);
                 switchLayout.setVisibility(View.GONE);
                 getSuggestion();
             }
@@ -262,7 +262,7 @@ public class SuggestFragment extends Fragment {
             @Override
             public void onResponse(Call<List<SuggestionData>> call, Response<List<SuggestionData>> response) {
                 List<SuggestionData> suggestionData = response.body();
-                SuggestionAdapter suggestionAdapter = new SuggestionAdapter(suggestionData,false);
+                SuggestionAdapter suggestionAdapter = new SuggestionAdapter(suggestionData,true);
                 mySuggestionRecycler.setAdapter(suggestionAdapter);
                 mySuggestionRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
             }

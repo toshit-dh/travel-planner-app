@@ -13,6 +13,19 @@ public class SuggestionData {
     private String date;
     private int sentiment;
     private int votes;
+    private Boolean isVoted;
+
+    public void setVoted(Boolean voted) {
+        isVoted = voted;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    public Boolean getVoted() {
+        return isVoted;
+    }
 
     public int getSentiment() {
         return sentiment;

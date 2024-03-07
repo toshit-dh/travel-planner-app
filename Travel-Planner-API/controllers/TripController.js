@@ -151,9 +151,15 @@ module.exports.getWeather = async (req, res, next) => {
 module.exports.planItenary = async (req, res, next) => {
   try {
     const userId = req.user.user
-    console.log("hhg");
     const {email} = await User.findById(userId)
-    const { location, stay_days, budget } = req.query;;
+    const { location, stay_days, budget } = req.query;
+    console.log(location);
+    if(location.toLowerCase() === "pune"){
+      const data = fs.readFileSync(path.join(__dirname,"itenary.json"),'utf-8')
+      req.itenary = data
+      req.email = email
+      next()
+    }else{
     try {
       const response = await axios.post(
         "http://127.0.0.1:5000/make-trip-plan",
@@ -163,14 +169,13 @@ module.exports.planItenary = async (req, res, next) => {
           budget: budget.trim(),
         }
       );
-      console.log(response.data);
       const data = response.data.slice(7,-3)
       req.itenary = data
       req.email = email
       next()
     } catch (e) {
       console.log(e.message);
-    }
+    }}
   } catch (e) {
     console.log(e.message);
   }

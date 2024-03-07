@@ -29,11 +29,9 @@ const file = multer({
 });
 const generatePdf = (req, res,next) => {
   try {
-    console.log(typeof req.itenary);
     const jsonData = JSON.parse(req.itenary);
     const pdfPath = path.join(path.dirname(__dirname),"data","itenaries",`${v4()}.pdf`)
     const doc = new PDFDocument();
-    console.log(pdfPath);
     const stream = fs.createWriteStream(pdfPath);
     doc.pipe(stream);
     doc.fontSize(20).text("Travel Itinerary", { align: "center" });
@@ -106,9 +104,7 @@ const generateEmail = async (req, res, next) => {
       ],
     };
     try {
-        console.log("buu");
       await transporter.sendMail(mailOptions);
-      console.log("huu");
       fs.unlink(pdfPath, (err) => {
         if (err) {
           console.error("Error deleting PDF file:", err);
@@ -116,16 +112,16 @@ const generateEmail = async (req, res, next) => {
           console.log("PDF file deleted successfully.");
         }
       });
-      let intrestingActivities;
+      let intrestingActivitiesObj;
       const dayPlan = req.itenaryData.map((item,index)=>{
         if(index!=10) return item
-        if(index==10) intrestingActivities = item
-      })
-      console.log(req.itenaryData);
+        if(index==10) intrestingActivitiesObj = item
+      }).filter((item)=>item)
+      const {interestingActivities} = intrestingActivitiesObj
       return res
         .status(200)
         .json(
-          { message: "Email sent to your registered email",dayPlan,intrestingActivities}
+          { message: "Email sent to your registered email",dayPlan,intrestingActivities: interestingActivities}
         );
     } catch (error) {
       console.error("Error sending email:", error);

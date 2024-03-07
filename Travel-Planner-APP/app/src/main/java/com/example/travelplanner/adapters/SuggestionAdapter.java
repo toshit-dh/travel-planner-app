@@ -46,13 +46,25 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
         if(!mySuggestion){
             holder.button.setVisibility(View.GONE);
         }
+        else {
+            holder.like.setEnabled(false);
+        }
         SuggestionData suggestionDataItem = suggestionData.get(position);
+        if(suggestionDataItem.getVoted()){
+            holder.like.setImageResource(R.drawable.heart_fill);
+        }
+        else{
+            holder.like.setImageResource(R.drawable.heart_border);
+        }
         holder.tag.setText(suggestionDataItem.getTag());
-        holder.city.setText(suggestionDataItem.getLoc().getCity());
+        String city = suggestionDataItem.getLoc().getCity();
+        String CapitalizedCity = city.substring(0,1).toUpperCase() + city.substring(1);
+        holder.city.setText(CapitalizedCity);
         Log.e("gf",suggestionDataItem.getLoc().getCity());
         holder.country.setText(suggestionDataItem.getLoc().getCountry());
         holder.msg.setText(suggestionDataItem.getMsg());
         holder.date.setText(suggestionDataItem.getDate());
+        Log.e("date",suggestionDataItem.getDate());
         holder.by.setText("~"+suggestionDataItem.getBy());
         int sentiment = suggestionDataItem.getSentiment();
         if(sentiment > 0){
@@ -65,14 +77,14 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
             holder.sentiment.setText("Sentiment: Neutral");
         }
         holder.votes.setText(Integer.toString(suggestionDataItem.getVotes()));
+        Map<String, String> userHeaders = new HashMap<>();
+        userHeaders.put("Content-Type", "application/json");
+        userHeaders.put("Authorization", MyPrefs.getToken(holder.itemView.getContext()));
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int adapterPosition = holder.getAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    Map<String, String> userHeaders = new HashMap<>();
-                    userHeaders.put("Content-Type", "application/json");
-                    userHeaders.put("Authorization", MyPrefs.getToken(view.getContext()));
                     RetrofitInstance.getInstance().apiInterface.onRemoveSuggestion(suggestionDataItem.getId(),userHeaders).enqueue(new Callback<StringResponse>() {
                         @Override
                         public void onResponse(Call<StringResponse> call, Response<StringResponse> response) {
@@ -83,6 +95,57 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
                                 notifyItemRemoved(adapterPosition);
                             }
                             else{
+                                Log.e("error",response.errorBody().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<StringResponse> call, Throwable t) {
+                            Log.e("servererror",t.getMessage());
+                        }
+                    });
+                }
+            }
+        });
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(suggestionDataItem.getVoted()){
+                    RetrofitInstance.getInstance().apiInterface.onRemoveVote(suggestionDataItem.getId(),userHeaders).enqueue(new Callback<StringResponse>() {
+                        @Override
+                        public void onResponse(Call<StringResponse> call, Response<StringResponse> response) {
+                            if(response.isSuccessful()){
+                                StringResponse stringResponse = response.body();
+                                if(stringResponse.getStatus()){
+                                    suggestionDataItem.setVoted(false);
+                                    holder.like.setImageResource(R.drawable.heart_border);
+                                    suggestionDataItem.setVotes(suggestionDataItem.getVotes()-1);
+                                    notifyItemChanged(position);
+                                }
+                            }
+                            else{
+                                Log.e("error",response.errorBody().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<StringResponse> call, Throwable t) {
+                            Log.e("servererror",t.getMessage());
+                        }
+                    });
+                }else {
+                    RetrofitInstance.getInstance().apiInterface.onVotingSuggestion(suggestionDataItem.getId(),userHeaders).enqueue(new Callback<StringResponse>() {
+                        @Override
+                        public void onResponse(Call<StringResponse> call, Response<StringResponse> response) {
+                            if(response.isSuccessful()){
+                                StringResponse stringResponse = response.body();
+                                if(stringResponse.getStatus()){
+                                    suggestionDataItem.setVoted(true);
+                                    holder.like.setImageResource(R.drawable.heart_fill);
+                                    suggestionDataItem.setVotes(suggestionDataItem.getVotes()+1);
+                                    notifyItemChanged(position);
+                                }
+                            }else {
                                 Log.e("error",response.errorBody().toString());
                             }
                         }
@@ -110,6 +173,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
         private TextView by;
         private TextView votes;
         private TextView sentiment;
+        private ImageView like;
         private Button button;
         public ViewHolder(View itemView){
             super(itemView);
@@ -120,6 +184,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
             date = itemView.findViewById(R.id.suggtime);
             by = itemView.findViewById(R.id.suggby);
             votes = itemView.findViewById(R.id.votes);
+            like = itemView.findViewById(R.id.mylike);
             sentiment = itemView.findViewById(R.id.sentiment);
             button = itemView.findViewById(R.id.removesugg);
         }

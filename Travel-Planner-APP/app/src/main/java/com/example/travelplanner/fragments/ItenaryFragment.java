@@ -3,6 +3,7 @@ package com.example.travelplanner.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.travelplanner.R;
+import com.example.travelplanner.adapters.ItenaryAdapter;
 import com.example.travelplanner.api.ItenaryData;
 import com.example.travelplanner.api.RetrofitInstance;
 import com.example.travelplanner.data.MyPrefs;
@@ -57,6 +59,9 @@ public class ItenaryFragment extends Fragment {
                             if(response.isSuccessful()){
                                 progressBar.setVisibility(View.GONE);
                                 ItenaryData itenaryData = response.body();
+                                ItenaryAdapter itenaryAdapter = new ItenaryAdapter(itenaryData.getDayPlan(),itenaryData.getIntrestingActivities());
+                                itenaryDataRecycler.setAdapter(itenaryAdapter);
+                                itenaryDataRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
                                 Toast.makeText(requireContext(),itenaryData.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             else {

@@ -43,6 +43,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
+  socket.on("joinnotif",(userId)=>{
+    console.log(`User connected with userId: ${userId}`);
+  })
   socket.on("error", (error) => {
     console.error("Socket connection error:", error);
   });

@@ -1,7 +1,7 @@
 const Suggestion = require("../models/SuggestionModel");
 const User = require("../models/UserModel");
-const Sentiment = require('sentiment')
-const sentimentAnalyse = new Sentiment()
+const Sentiment = require("sentiment");
+const sentimentAnalyse = new Sentiment();
 module.exports.addSugg = async (req, res, next) => {
   try {
     const { user } = req.user;
@@ -9,10 +9,16 @@ module.exports.addSugg = async (req, res, next) => {
     const { name } = await User.findOne({ _id: user });
     console.log(name);
     const { tag, city, country, msg } = req.query;
-    const cityL = city.toLowerCase()
+    const cityL = city.toLowerCase();
     console.log(tag, city, country, msg);
-    const {score} = sentimentAnalyse.analyze(msg)
-    const body = { by: name, tag, loc: { city: cityL, country }, msg,sentiment: score };
+    const { score } = sentimentAnalyse.analyze(msg);
+    const body = {
+      by: name,
+      tag,
+      loc: { city: cityL, country },
+      msg,
+      sentiment: score,
+    };
     console.log(body);
     await Suggestion.create(body);
     console.log("done");
@@ -37,12 +43,33 @@ module.exports.removeSugg = async (req, res, next) => {
 };
 module.exports.getSugg = async (req, res, next) => {
   try {
-    const { tag, city} = req.query;
-    console.log(tag,city);
-    const cityL = city.toLowerCase()
-    const suggestions = await Suggestion.find({ "loc.city": cityL,tag });
-    console.log(suggestions);
-    return res.json(suggestions);
+    const { tag, city } = req.query;
+    const cityL = city.toLowerCase();
+    const suggestions = await Suggestion.find({ tag, "loc.city": cityL });
+    const suggestion = suggestions.map((item) => {
+      const { createdAt } = item;
+      const date = createdAt.toISOString().split("T")[0];
+      const fname = item.by.split(" ")[0];
+      return {
+        id: item._id,
+        by: fname,
+        tag: item.tag,
+        loc: {
+          city: item.loc.city,
+          country: item.loc.country,
+        },
+        msg: item.msg,
+        votes: item.votes,
+        date,
+        sentiment: item.sentiment,
+        isVoted: item.votedBy.reduce(
+          (isVoted, item) => isVoted || item == req.user.user,
+          false
+        ),
+      };
+    });
+    console.log(suggestion);
+    return res.json(suggestion);
   } catch (error) {
     next(e);
   }
@@ -67,7 +94,8 @@ module.exports.getUserSugg = async (req, res, next) => {
         msg: item.msg,
         votes: item.votes,
         date,
-        sentiment: item.sentiment
+        sentiment: item.sentiment,
+        isVoted: false
       };
     });
     return res.json(mySuggestion);
@@ -76,25 +104,29 @@ module.exports.getUserSugg = async (req, res, next) => {
     next(e);
   }
 };
-module.exports.voteSugg = async (req,res,next)=>{
+module.exports.voteSugg = async (req, res, next) => {
   try {
-    const {suggId} = req.query
-    const suggestion = await Suggestion.findOne({_id: suggId})
-    suggestion.votes += 1
-    await suggestion.save()
-    return res.json({ status: true, msg: "Vote Added" });
+    const { suggId } = req.query;
+    console.log(suggId);
+    const suggestion = await Suggestion.findOne({ _id: suggId });
+      suggestion.votes += 1;
+      suggestion.votedBy.push(req.user.user);
+      await suggestion.save();
+      return res.json({ status: true, msg: "Vote Added" });
   } catch (e) {
-    next(e)
+    next(e);
   }
-}
-module.exports.removeVote = async (req,res,next)=>{
+};
+module.exports.removeVote = async (req, res, next) => {
   try {
-    const {suggId} = req.query
-    const suggestion = await Suggestion.findOne({_id: suggId})
-    suggestion.votes -= 1
-    await suggestion.save()
+    const { suggId } = req.query;
+    const suggestion = await Suggestion.findOne({ _id: suggId });
+    suggestion.votes -= 1;
+    const removedUser = suggestion.votedBy.filter((item)=>item!=req.user.user)
+    suggestion.votedBy = removedUser
+    await suggestion.save();
     return res.json({ status: true, msg: "Vote Removed" });
   } catch (e) {
-    next(e)
+    next(e);
   }
-}
+};

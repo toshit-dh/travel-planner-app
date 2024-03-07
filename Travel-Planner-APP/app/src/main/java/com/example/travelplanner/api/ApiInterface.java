@@ -80,6 +80,12 @@ public interface ApiInterface {
     @GET("sugg/getSugg")
     Call<List<SuggestionData>> onSearchSuggestion(@Query("tag") String tag,@Query("city") String city,@HeaderMap Map<String,String> headers);
 
+    @GET("sugg/voteSugg")
+    Call<StringResponse> onVotingSuggestion(@Query("suggId") String suggId,@HeaderMap Map<String,String> headers);
+
+    @GET("sugg/removeVote")
+    Call<StringResponse> onRemoveVote(@Query("suggId") String suggId,@HeaderMap Map<String,String> headers);
+
     @GET("chats/getChatItems")
     Call<ChatItems> onChatItems(@HeaderMap Map<String,String> headers);
 

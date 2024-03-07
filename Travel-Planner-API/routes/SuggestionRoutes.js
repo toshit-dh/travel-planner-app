@@ -5,6 +5,6 @@ router.get("/addSugg",verifyToken,addSugg)
 router.get("/removeSugg",verifyToken,removeSugg)
 router.get("/getSugg",verifyToken,getSugg)
 router.get("/mySugg",verifyToken,getUserSugg)
-router.get("voteSugg",verifyToken,voteSugg)
-router.get("removeVote",verifyToken,removeVote)
+router.get("/voteSugg",verifyToken,voteSugg)
+router.get("/removeVote",verifyToken,removeVote)
 module.exports = router

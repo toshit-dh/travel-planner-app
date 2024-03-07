@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/main"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
+    <LinearLayout
+        android:id="@+id/dayplanlinear"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/whichday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Day "
+            android:textColor="@color/text"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Morning"
+            android:textColor="@color/text"
+            android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/morningactivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Activity: "
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/morningcost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Cost: "
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Afternoon"
+            android:textColor="@color/text"
+            android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/afternoonactivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Activity: "
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/afternooncost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Cost: "
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Evening"
+            android:textColor="@color/text"
+            android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/eveningactivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Activity: "
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/eveningcost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="Cost: "
+            android:textSize="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/iactivitieslinear"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textColor="@color/text"
+            android:text="Intresting Activities"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/intrestingactivityrecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -5,7 +5,7 @@ const { getToken } = require("../amadeus/amadeus");
 async function getFromAxios(url, headers) {
   try {
     const response = await axios.get(url, { headers });
-    return response.data.data;
+    return response.data;
   } catch (e) {
     console.log(e.message);
   }
@@ -59,13 +59,11 @@ getFlights = async (req, res, next) => {
   try {
     const { src, des, date, range } = req.query;
     console.log(date,range);
-    if (src === "DEL" && des === "BOM") {
-      const json = fs.readFileSync(
-        path.join(__dirname, "flight.json"),
-        "utf-8"
-      );
-      const data = JSON.parse(json);
-      return res.json(data);
+    if(src === "DEL" && des=== "BOM"){
+      const json = fs.readFileSync(path.join(__dirname,"flight.json"),'utf-8')
+      const data = JSON.parse(json)
+      return res.json(data)
+
     }
     const headers = req.headers;
     const url = `https://test.api.amadeus.com/v1/shopping/flight-dates?origin=${src}&destination=${des}&departureDate=${date},${range}&oneWay=true&nonStop=false&viewBy=DATE`;
@@ -74,7 +72,7 @@ getFlights = async (req, res, next) => {
     const promises = flightDates.map(async (item) => {
       const api = item.links.flightOffers;
       const date = item.departureDate;
-      const flightOndate = await makeAmadeusRequest(api, token);
+      const flightOndate = await getFromAxios(api,headers);
       const arrFlight = flightOndate.data.slice(0, 15);
       const flightData = arrFlight.map((item) => {
         const { duration, segments } = item.itineraries[0];
@@ -96,7 +94,6 @@ getFlights = async (req, res, next) => {
       };
     });
     const data = await Promise.all(promises);
-    console.log(data);
     fs.writeFileSync(path.join(__dirname, "flight.json"), JSON.stringify(data));
     return res.json(data);
   } catch (e) {
@@ -151,14 +148,16 @@ module.exports.getDestination = async (req, res, next) => {
 module.exports.getActivities = async (req, res, next) => {
   try {
     const { lat, lon } = req.query;
+    const json = fs.readFileSync(path.join(__dirname,"activity.json"),'utf-8')
+    const data = JSON.parse(json)
+    return res.json(data);
     const headers = req.headers;
     const url = `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=41.397158&longitude=2.160873&radius=1&page%5Blimit%5D=10&page%5Boffset%5D=0`;
     const activities = await getFromAxios(url, headers);
-    const data = activities.map((item) => {
+    const activity = activities.map((item) => {
       const { name, category, rank, tags } = item;
       return { name, category, rank, tags };
     });
-    return res.json(data);
   } catch (e) {
     next(e);
   }

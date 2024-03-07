@@ -23,6 +23,10 @@ const suggestSchema = mongoose.Schema(
     votes : {
       type : Number,
       default : 0
+    },
+    votedBy: {
+      type : [mongoose.Types.ObjectId],
+      default: []
     }
   },
   {

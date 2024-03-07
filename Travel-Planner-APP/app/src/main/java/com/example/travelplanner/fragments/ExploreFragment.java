@@ -235,7 +235,6 @@ public class ExploreFragment extends Fragment {
                         selectedDate.get(Calendar.YEAR),
                         selectedDate.get(Calendar.MONTH) + 1,
                         selectedDate.get(Calendar.DAY_OF_MONTH));
-                pickFlightDate.setVisibility(View.GONE);
                 searchFlightsApi(srcIATACode, destIATACode,departureDateText,plus5);
             } else {
                 Toast.makeText(requireContext(), "Invalid source or destination city.", Toast.LENGTH_SHORT).show();
@@ -249,7 +248,8 @@ public class ExploreFragment extends Fragment {
         searchActivityApi();
     }
     private void searchFlightsApi(String srcIATACode, String destIATACode,String departureDate,String plus5day) {
-        searchhotel.setEnabled(false);
+
+
         Map<String, String> userHeaders = new HashMap<>();
         userHeaders.put("Content-Type", "application/json");
         userHeaders.put("Authorization", MyPrefs.getToken(requireContext()));
