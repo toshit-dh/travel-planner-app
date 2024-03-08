@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
+        webSettings.
         webView.loadUrl("http://travelplanner-aboutus.netlify.app/");
 
         webView.setWebViewClient(new WebViewClient());

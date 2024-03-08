@@ -31,6 +31,11 @@ public class ChatItems {
         private String _id;
         private String city;
         private String  creator;
+        private String date;
+
+        public String getDate() {
+            return date;
+        }
 
         public String getCreator() {
             return creator;

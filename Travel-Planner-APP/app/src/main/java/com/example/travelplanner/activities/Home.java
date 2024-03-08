@@ -1,5 +1,7 @@
 package com.example.travelplanner.activities;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +31,9 @@ import android.widget.Toast;
 
 import com.example.travelplanner.R;
 import com.example.travelplanner.api.ChatItems;
+import com.example.travelplanner.api.SocketManager;
+import com.example.travelplanner.data.MyPrefs;
+import com.example.travelplanner.data.UserData;
 import com.example.travelplanner.fragments.AboutFragment;
 
 import com.example.travelplanner.fragments.GroupChatFragment;
@@ -45,6 +51,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import io.socket.client.Manager;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import io.socket.engineio.client.Transport;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 //    ActivityMainBinding binding;
@@ -59,6 +75,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Gson gson = new Gson();
+        String data = MyPrefs.getData(Home.this);
+        UserData userData = gson.fromJson(data, UserData.class);
+        String userId = userData.get_id();
         setContentView(R.layout.nav_main);
         fab = findViewById(R.id.fab);
         notification = findViewById(R.id.notifButton);
@@ -72,6 +92,48 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setBackground(null);
+        Socket socket = SocketManager.getInstance();
+        socket.connect();
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Home.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("socket","connected");
+                    }
+                });
+            }
+        });
+        socket.on(Manager.EVENT_TRANSPORT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Transport transport = (Transport) args[0];
+                // Adding headers when EVENT_REQUEST_HEADERS is called
+                transport.on(Transport.EVENT_REQUEST_HEADERS, new Emitter.Listener() {
+                    @Override
+                    public void call(Object... args) {
+                        Log.v(TAG, "Caught EVENT_REQUEST_HEADERS after EVENT_TRANSPORT, adding headers");
+                        Map<String, List<String>> mHeaders = (Map<String, List<String>>)args[0];
+                        mHeaders.put("Authorization", Arrays.asList("Basic bXl1c2VyOm15cGFzczEyMw=="));
+                    }
+                });
+            }
+        });
+        socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Home.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Throwable error = (Throwable) args[0];
+                        error.printStackTrace();
+                        Log.e("sockey",error.getMessage());
+                    }
+                });
+            }
+        });
+        socket.emit("joinnotif",userId);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

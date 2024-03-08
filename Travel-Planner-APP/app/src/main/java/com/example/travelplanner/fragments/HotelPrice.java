@@ -23,7 +23,7 @@ public class HotelPrice extends Fragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://hotel-price-predictor-dmgdm5vgrgspet3axngwlj.streamlit.app/");
+        webView.loadUrl("https://hotel-price-predictor-tiowggu4feesshyitrqwso.streamlit.app/");
 
         webView.setWebViewClient(new WebViewClient());
         return view;

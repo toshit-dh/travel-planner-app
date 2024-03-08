@@ -3,21 +3,30 @@ package com.example.travelplanner.fragments;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -44,6 +53,8 @@ import com.example.travelplanner.utils.NotificationHelper;
 import com.example.travelplanner.utils.RealPathUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.net.URLConnection;
@@ -72,6 +83,7 @@ public class GroupChatFragment extends Fragment {
     private EditText writeMessage;
     private RecyclerView groupMessages;
     private RecyclerView groupImages;
+    private String foldername;
     private ImageView image;
     private LinearLayout tripDetail;
     private FloatingActionButton download;
@@ -196,9 +208,12 @@ public class GroupChatFragment extends Fragment {
                     messagesAdapter = new MessagesAdapter(tripChatsImages.getMessage());
                     groupMessages.setAdapter(messagesAdapter);
                     groupMessages.setLayoutManager(new LinearLayoutManager(requireContext()));
-                    groupMessages.smoothScrollToPosition(messagesAdapter.getItemCount()-1);
+                    if(messagesAdapter.getItemCount()>0){
+                        groupMessages.smoothScrollToPosition(messagesAdapter.getItemCount()-1);
+                    }
                     ImagesAdapter imagesAdapter = new ImagesAdapter(tripChatsImages.getImages());
                     groupImages.setAdapter(imagesAdapter);
+                    Log.e("count",Integer.toString(imagesAdapter.getItemCount()));
                     groupImages.setLayoutManager(new GridLayoutManager(requireContext(),3,GridLayoutManager.VERTICAL,false));
                 }
                 else{
@@ -266,9 +281,10 @@ public class GroupChatFragment extends Fragment {
             }
         });
         download.setOnClickListener(new View.OnClickListener() {
+            ArrayList<String> imageUrls = new ArrayList<>();
             @Override
             public void onClick(View view) {
-                NotificationHelper.showNotification(requireContext(),"hi","by");
+
             }
         });
         return view;

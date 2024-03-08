@@ -92,6 +92,12 @@ public interface ApiInterface {
     @GET("chats/addFriend")
     Call<StringResponse> onAddFriend(@Query("add_who") String id,@HeaderMap Map<String,String> headers);
 
+    @GET("chats/acceptFriend")
+    Call<StringResponse> onAcceptFriend(@Query("ofUserId") String userId,@HeaderMap Map<String,String> headers);
+
+    @GET("chats/rejectFriend")
+    Call<StringResponse> onRejectFriend(@Query("ofUserId") String userId,@HeaderMap Map<String,String> headers);
+
     @GET("chats/getTripMessages")
     Call<TripChatsImages> onGetMessages(@Query("tripId") String tripId, @HeaderMap Map<String,String> headers);
 

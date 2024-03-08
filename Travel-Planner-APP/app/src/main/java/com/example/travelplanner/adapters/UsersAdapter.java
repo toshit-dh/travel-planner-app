@@ -32,6 +32,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
         this.users = users;
         this.usedWhere = usedWhere;
     }
+    public void filterList(List<ChatItems.User> filteredUsers) {
+        users = filteredUsers;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -34,7 +34,7 @@ module.exports.addTrip = async (req, res, next) => {
       tripmates: tripmates
         ? Array.isArray(tripmates)
           ? [...tripMatesId, req.user.user]
-          : [tripMatesId]
+          : [tripMatesId,req.user.user]
         : [req.user.user],
       creator: req.user.user,
     });
@@ -42,15 +42,29 @@ module.exports.addTrip = async (req, res, next) => {
       const tripMatesPromises = tripMatesId.map(async (item) => {
         const id = item;
         const user = await User.findById(id);
-        user.trips.unshift(trip);
+        console.log(user);
+        user.tripsRequests.unshift(trip);
         await user.save();
       });
       await Promise.all(tripMatesPromises);
     }
-    await Chat.create({ trip: trip._id });
-    user.trips.unshift(trip);
+    else{
+      const user = await User.findById(tripMatesId);
+      user.tripsRequests.unshift(trip);
+      await user.save()
+    }
+    user.trips.unshift(trip._id);
     await user.save();
-    return res.status(200).json({ msg: "Trip Added" });
+    await Chat.create({ trip: trip._id });
+    // if(Array.isArray(tripmates)){
+    //   tripmates.map((item)=>{
+    //     req.io.to(item).emit("tripzrequests",{_id: trip._id,city,date,creator: id})
+    //   })
+    // }
+    // else{
+    //   req.io.to(tripMatesId).emit("tripzrequests",{_id: trip._id,city,date,creator: id})
+    // }
+    return res.status(200).json({ msg: "Trip Added" })
   } catch (e) {
     console.log(e.message);
     if (req.file && req.file.filename) {

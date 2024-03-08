@@ -1,11 +1,16 @@
 package com.example.travelplanner.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +25,7 @@ import com.example.travelplanner.api.ChatItems;
 import com.example.travelplanner.api.RetrofitInstance;
 import com.example.travelplanner.data.MyPrefs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +35,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChatFragment extends Fragment {
+    private LinearLayout users;
+    private LinearLayout friensTRips;
     private RecyclerView usersRecycler;
     private RecyclerView friendsRecycer;
     private RecyclerView tripsRecycler;
+    private EditText searchUsers;
+    private List<ChatItems.User> userList ;
+    private List<ChatItems.User> friendsList ;
+    private List<ChatItems.Trip> tripList ;
+    private UsersAdapter usersAdapter;
     private OnItemClickListener onItemClickListener;
     public ChatFragment(OnItemClickListener onItemClickListener){
         this.onItemClickListener = onItemClickListener;
@@ -43,6 +56,9 @@ public class ChatFragment extends Fragment {
         usersRecycler = view.findViewById(R.id.usersrecycler);
         friendsRecycer = view.findViewById(R.id.friendrecycler);
         tripsRecycler = view.findViewById(R.id.otriprecycler);
+        users = view.findViewById(R.id.searchuserlinear);
+        friensTRips = view.findViewById(R.id.searchfriendslinear);
+        searchUsers = view.findViewById(R.id.searchuserstext);
         Map<String, String> userHeaders = new HashMap<>();
         userHeaders.put("Content-Type", "application/json");
         userHeaders.put("Authorization", MyPrefs.getToken(requireContext()));
@@ -51,10 +67,10 @@ public class ChatFragment extends Fragment {
             public void onResponse(Call<ChatItems> call, Response<ChatItems> response) {
                 if (response.isSuccessful()) {
                     ChatItems chatItems = response.body();
-                    List<ChatItems.User> userList = chatItems.getUsers();
+                    userList = chatItems.getUsers();
                     List<ChatItems.User> friendsList = chatItems.getFriends();
                     List<ChatItems.Trip> tripList = chatItems.getTrips();
-                    UsersAdapter usersAdapter = new UsersAdapter(userList, "Users");
+                    usersAdapter = new UsersAdapter(userList, "Users");
                     usersRecycler.setAdapter(usersAdapter);
                     usersRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
                     UsersAdapter friendRequestAdapter = new UsersAdapter(friendsList, "Friends");
@@ -71,6 +87,37 @@ public class ChatFragment extends Fragment {
             @Override
             public void onFailure(Call<ChatItems> call, Throwable t) {
                 Log.e("servererror", t.getMessage());
+            }
+        });
+        searchUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchUsers.setVisibility(View.GONE);
+                friensTRips.setVisibility(View.GONE);
+                users.setVisibility(View.VISIBLE);
+            }
+        });
+        searchUsers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                List<ChatItems.User> filteredUsers = new ArrayList<>();
+                Log.e("ii","user"+userList.get(0).get_id());
+                for (ChatItems.User user : userList) {
+                    if (user.getUsername().toLowerCase().contains(searchUsers.getText().toString().toLowerCase())) {
+                        filteredUsers.add(user);
+                        usersAdapter.filterList(filteredUsers);
+                    }
+                }
             }
         });
         return view;
