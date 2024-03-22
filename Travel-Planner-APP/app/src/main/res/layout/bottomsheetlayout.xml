@@ -47,12 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp">
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/plan" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,15 +58,13 @@
             android:text="Add A Trip"
             android:textColor="@color/text"
             android:textSize="16sp" />
-
     </LinearLayout>
     <LinearLayout
         android:id="@+id/planitenary"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:padding="10dp"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -89,13 +85,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 >
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/suggest"
             android:tint="@color/text"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,5 +98,24 @@
             android:textColor="@color/text"
             android:textSize="16sp" />
     </LinearLayout>
-
+    <LinearLayout
+        android:padding="10dp"
+        android:id="@+id/locate"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/location"
+            android:tint="@color/text"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="View Map"
+            android:textColor="@color/text"
+            android:textSize="16sp" />
+</LinearLayout>
 </LinearLayout>

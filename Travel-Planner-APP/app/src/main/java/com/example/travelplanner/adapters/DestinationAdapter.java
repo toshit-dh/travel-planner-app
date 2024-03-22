@@ -28,12 +28,15 @@ import com.squareup.picasso.Picasso;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.DestinationDataViewHolder> {
     private List<DestinationData> destinationsData;
     public DestinationAdapter(List<DestinationData> destinationsData){
         this.destinationsData = destinationsData;
+        Collections.reverse(this.destinationsData);
     }
     @NonNull
     @Override

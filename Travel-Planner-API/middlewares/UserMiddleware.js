@@ -31,7 +31,7 @@ module.exports.generateEmail = async (req, res, next) => {
     from: process.env.TRAVEL_EMAIL,
     to: userEmail,
     subject: "Email Verification",
-    text: `Click the following link to verify your email: http://192.168.1.12:5000/api/auth/verifyEmail/${token}`,
+    text: `Click the following link to verify your email: http://192.168.127.70:5000/api/auth/verifyEmail/${token}`,
   };
   try {
     await transporter.sendMail(mailOptions);

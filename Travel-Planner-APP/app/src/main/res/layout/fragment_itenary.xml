@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:textAlignment="center"
-            android:hint="Budget(INR)"
+            android:hint="Budget(USD)"
             android:textColorHint="#ffffff"
             />
     </LinearLayout>

@@ -37,6 +37,7 @@ import com.example.travelplanner.data.UserData;
 import com.example.travelplanner.fragments.AboutFragment;
 
 import com.example.travelplanner.fragments.GroupChatFragment;
+import com.example.travelplanner.fragments.MapFragment;
 import com.example.travelplanner.fragments.NotifFragment;
 import com.example.travelplanner.fragments.SuggestFragment;
 import com.example.travelplanner.fragments.HomeFragment;
@@ -185,6 +186,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         LinearLayout trip = dialog.findViewById(R.id.planatrip);
         LinearLayout guides = dialog.findViewById(R.id.planitenary);
         LinearLayout chat = dialog.findViewById(R.id.suggestions);
+        LinearLayout locate = dialog.findViewById(R.id.locate);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
         trip.setOnClickListener(v -> {
             dialog.dismiss();
@@ -200,6 +202,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         chat.setOnClickListener(v -> {
             dialog.dismiss();
             openfragment(new SuggestFragment());
+        });
+        locate.setOnClickListener(v -> {
+            dialog.dismiss();
+            openfragment(new MapFragment());
         });
         cancelButton.setOnClickListener(view -> dialog.dismiss());
         dialog.show();

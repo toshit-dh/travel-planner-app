@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const morgan = require('morgan')
 const mongoose = require("mongoose");
 const socketIO = require("socket.io");
 const userRoutes = require("./routes/UserRoutes");
@@ -9,9 +10,9 @@ const tripRoutes = require("./routes/TripRoutes");
 const suggRoutes = require("./routes/SuggestionRoutes");
 const chatsRoute = require("./routes/ChatsRoute");
 require("dotenv").config();
-
 const app = express();
 app.use(cors());
+app.use(morgan('combined'))
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.json({ limit: "50mb" }));

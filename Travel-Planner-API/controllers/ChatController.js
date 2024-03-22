@@ -2,7 +2,6 @@ const { Trip } = require("../models/TripModel");
 const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
 const fs = require("fs");
-const io = require("../index");
 module.exports.getItems = async (req, res, next) => {
   try {
     const currentUserId = req.user.user;
@@ -36,7 +35,6 @@ module.exports.getItems = async (req, res, next) => {
     });
     const tripPromises = tripsIds.map(async (item) => {
       const trip = await Trip.findById(item);
-      console.log(trip);
       const {name} = await User.findById(trip.creator);
       return {
         _id: trip._id,
