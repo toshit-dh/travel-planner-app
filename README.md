@@ -58,15 +58,18 @@ Welcome to the Travel Planner App! This application helps users plan their trips
 
 ### Trip Fragment
 - View your current and past trips.
+- Get the weather of upcoming trip.
 - Edit trip details or delete trips you no longer need.
 
 ### Add Section
 - Plan new itineraries by selecting dates, destinations, and activities.
+- Get the suggestions from other users of a place.
 - Use the integrated map to view your trip route and locations.
 
 ### Social Section
 - Add friends and view their travel plans.
 - Create joint trips with friends and manage group itineraries.
+- Live chat with your friends.
 
 ### Explore Section
 - Search for flights, hotels, and activities using the Amadeus API.
