@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
     public static RetrofitInstance instance;
     public ApiInterface apiInterface;
-    public static String IPAddress = "http://192.168.1.12:5000";
+    public static String IPAddress = "http://192.168.81.70:5000";
     RetrofitInstance() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(IPAddress)
                 .addConverterFactory(GsonConverterFactory.create())
