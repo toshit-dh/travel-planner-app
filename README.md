@@ -90,6 +90,37 @@ We welcome contributions from the community! To contribute:
     ```
 5. Open a pull request and describe your changes.
 
+## Images
+
+<table>
+  <tr>
+    <td align="center"><img src="Screenshots/intro.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/login.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/signup.jpg" width="200px"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/mytrip.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/chat.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/social.jpg" width="200px"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/hotel.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/hotelprice.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/activities.jpg" width="200px"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/social.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/add_trip.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/flight.jpg" width="200px"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/suggestions.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/itenary.jpg" width="200px"></td>
+    <td align="center"><img src="Screenshots/user.jpg" width="200px"></td>
+  </tr>
+</table>
+
+## Video
 [![Watch the demo video](https://img.youtube.com/vi/XrTq7cusLXI/0.jpg)](https://www.youtube.com/watch?v=XrTq7cusLXI)
 
 
